@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decentralized Voting</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="../images/logo.jpeg" alt="Logo" id="logo" class="logo">
+            <h1>Decentralized Voting System</h1>
+        </div>
+        <div class="nav-buttons">
+            <button class="nav-btn login-btn" onclick="showRegisterForm()">
+                <i class="fas fa-user"></i> Login
+            </button>
+            <button class="nav-btn register-btn" onclick="showCandidateForm()">
+                <i class="fas fa-user-plus"></i> Register as Candidate
+            </button>
+        </div>
+    </nav>
+
+    <div class="hero-section">
+        <div class="background-image"><img src="../images/bg.jpeg" alt="bg"></div>
+        <div class="content-wrapper">
+            <div id="logo-center" class="logo-center">
+                <img src="../images/logo.jpeg" alt="Logo">
+            </div>
+            <h2>Secure and Transparent Voting System</h2>
+            <div class="info"><p>Experience the future of voting with Decentralized Voting System</p></div>
+        </div>
+    </div>
+
+    <div id="alerts" class="alerts-container"></div>
+
+    <main>
+        <section id="main-content">
+            <h2 class="h2-title"> Current Candidates</h2>
+            <div id="candidates-list" class="candidates-grid"></div>
+        </section>
+
+        <section class="results-section">
+            <div class="results-container">
+                <div class="results-box">
+                    <button onclick="getVotes()" class="action-btn">
+                        <i class="fas fa-chart-bar"></i> View Vote Count
+                    </button>
+                    <div id="vote-results" class="results-display"></div>
+                </div>
+
+                <div class="results-box winner-box">
+                    <button onclick="getResult()" class="action-btn">
+                        <i class="fas fa-trophy"></i> View Results
+                    </button>
+                    <div id="election-result" class="results-display"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal Forms -->
+    <div id="register-form" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2><i class="fas fa-user"></i> Register as Voter</h2>
+            <div class="form-group">
+                <input type="text" id="voter-aadhar" placeholder="Aadhaar Number" maxlength="12">
+                <span class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <input type="text" id="voter-id" placeholder="Voter ID" maxlength="10">
+                <span class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <input type="number" id="voter-age" placeholder="Age">
+                <span class="error-message"></span>
+            </div>
+            <button onclick="registerVoter()" class="submit-btn">Register</button>
+        </div>
+    </div>
+
+    <div id="candidate-form" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2><i class="fas fa-user-tie"></i> Register as Candidate</h2>
+            <div class="form-group">
+                <input type="text" id="candidate-name" placeholder="Full Name">
+                <span class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <input type="number" id="candidate-age" placeholder="Age">
+                <span class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <input type="number" id="candidate-id" placeholder="Candidate ID">
+                <span class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <input type="text" id="candidate-image-cid" placeholder="Image CID">
+                <span class="error-message"></span>
+            </div>
+            <button onclick="registerAsCandidate()" class="submit-btn">Register</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.6.0/dist/web3.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

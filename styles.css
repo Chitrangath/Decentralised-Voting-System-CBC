@@ -1,0 +1,471 @@
+:root {
+    --primary-purple: #4c1b55;
+    --secondary-purple: #8B6F8F;
+    --dark-purple: #4A3B4F;
+    --light-purple: #9A8B9E;
+    --background: #F5F5F7;
+    --white: #FFFFFF;
+    --text-dark: #333333;
+    --text-light: #666666;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text-dark);
+    min-height: 100vh;
+}
+
+ /* Navbar Styles */
+.navbar {
+    background-color: var(--primary-purple);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+    background-color: var(--dark-purple);
+    padding: 0.5rem 2rem;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-container h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--white);
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.logo-center img {
+    border-radius: 50%;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.login-btn {
+    background-color: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+}
+
+.login-btn:hover {
+    background-color: var(--white);
+    color: var(--primary-purple);
+}
+
+.register-btn {
+    background-color: var(--white);
+    color: var(--primary-purple);
+}
+
+.register-btn:hover {
+    background-color: var(--light-purple);
+    color: var(--white);
+}
+
+/* Hero Section */
+.hero-section {
+    height: 100vh;
+    position: relative;
+    top: 92px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+}
+
+.hero-section .content-wrapper .info p {
+    margin: 20px;
+    font-family: 'footlight MT light', sans-serif;
+    font-weight: 900;
+    color: rgb(223, 209, 241);
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 95%;
+    background-color: var(--dark-purple);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: brightness(1);
+    z-index: -1;
+}
+
+.hero-section .background-image img {
+    width: 100vw;
+    height: 95vh;
+}
+
+.logo-center {
+    width: 264px;
+    height: 264px;
+    margin: 0 auto 2rem;
+    transition: all 0.3s ease;
+}
+
+/* Main Content */
+main {
+    padding: 2rem;
+    max-width: 1280px;
+    margin: 32px auto;
+    margin-top: 60px;
+}
+
+.h2-title {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    font-size: 2rem;
+    font-weight: 600;
+
+}
+
+.candidates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+.candidate-card {
+    background-color: var(--white);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+}
+
+.candidate-card:hover {
+    transform: translateY(-5px);
+}
+
+.candidate-image {
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+/* Results Section */
+.results-section {
+    margin-top: 3rem;
+}
+
+.results-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.results-box {
+    background-color: var(--white);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    border: 2px solid var(--primary-purple);
+}
+
+.winner-box {
+    border: 2px solid var(--primary-purple);
+}
+
+.action-btn {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 25px;
+    background-color: var(--primary-purple);
+    color: var(--white);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.action-btn:hover {
+    background-color: var(--dark-purple);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-light);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.error-message {
+    color: #ff4444;
+    font-size: 0.8rem;
+    position: absolute;
+    bottom: -1.2rem;
+    left: 0;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--primary-purple);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: var(--dark-purple);
+}
+
+/* Alert Styles */
+.alerts-container {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 3000;
+}
+
+.alert {
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    animation: slideIn 0.3s ease;
+}
+
+.alert.success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.alert.error {
+    background-color: #ff4444;
+    color: white;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 1rem;
+    }
+
+    .nav-buttons {
+        gap: 0.5rem;
+    }
+
+    .nav-btn {
+        padding: 0.6rem 1rem;
+    }
+
+    .logo-center {
+        width: 200px;
+        height: 200px;
+    }
+
+    main {
+        padding: 1rem;
+    }
+
+    .candidates-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Mobile Large (480px to 599px) */
+@media screen and (min-width: 480px) and (max-width: 599px) {
+    .navbar {
+        flex-direction: column;
+        padding: 0.5rem;
+        gap: 0.5rem;
+    }
+
+    .nav-buttons {
+        width: 100%;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .logo-container {
+        justify-content: center;
+    }
+
+    .logo-container h1 {
+        font-size: 1rem;
+    }
+
+    .candidates-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .hero-section h2 {
+        font-size: 1.75rem;
+        padding: 0 1rem;
+    }
+
+    .logo-center {
+        font-size: 3rem;
+        padding: 1rem;
+    }
+
+    .candidate-image {
+        height: 200px;
+    }
+
+    .results-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+/* Mobile Responsive Design */
+@media screen and (max-width: 768px) {
+    .navbar {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .logo-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .logo-container h1 {
+        font-size: 1.2rem;
+    }
+
+    .nav-buttons {
+        width: 100%;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .hero-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .logo-center {
+        font-size: 3rem;
+    }
+
+    main {
+        padding: 1rem;
+    }
+
+    .candidates-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .candidate-image {
+        height: 250px;
+    }
+
+    .results-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .results-box {
+        padding: 1.5rem;
+    }
+}
+
