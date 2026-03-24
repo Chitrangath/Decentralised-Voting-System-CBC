@@ -3,107 +3,333 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Decentralized Voting</title>
+    <title>VoteChain — Decentralised Voting</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav class="navbar">
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
         <div class="logo-container">
-            <img src="../images/logo.jpeg" alt="Logo" id="logo" class="logo">
-            <h1>Decentralized Voting System</h1>
+            <div class="logo-icon">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                    <polygon points="14,2 26,8 26,20 14,26 2,20 2,8" stroke="#63e6b6" stroke-width="1.5" fill="none"/>
+                    <polygon points="14,7 21,11 21,17 14,21 7,17 7,11" fill="#63e6b6" opacity="0.2"/>
+                    <circle cx="14" cy="14" r="3" fill="#63e6b6"/>
+                </svg>
+            </div>
+            <span class="logo-text">VoteChain</span>
+        </div>
+        <div class="nav-center">
+            <span class="chain-badge" id="chain-badge">
+                <span class="chain-dot"></span>
+                <span id="chain-name">Not Connected</span>
+            </span>
         </div>
         <div class="nav-buttons">
-            <button class="nav-btn login-btn" onclick="showRegisterForm()">
-                <i class="fas fa-user"></i> Login
+            <button class="nav-btn wallet-btn" id="wallet-btn" onclick="connectWallet()">
+                <i class="fas fa-wallet"></i>
+                <span id="wallet-label">Connect Wallet</span>
             </button>
-            <button class="nav-btn register-btn" onclick="showCandidateForm()">
-                <i class="fas fa-user-plus"></i> Register as Candidate
+            <button class="nav-btn outline-btn" onclick="showRegisterForm()">
+                <i class="fas fa-user-plus"></i> Register Voter
+            </button>
+            <button class="nav-btn primary-btn" onclick="showCandidateForm()">
+                <i class="fas fa-user-tie"></i> Stand for Election
             </button>
         </div>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </button>
     </nav>
 
-    <div class="hero-section">
-        <div class="background-image"><img src="../images/bg.jpeg" alt="bg"></div>
-        <div class="content-wrapper">
-            <div id="logo-center" class="logo-center">
-                <img src="../images/logo.jpeg" alt="Logo">
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobile-menu">
+        <button class="nav-btn wallet-btn full-width" onclick="connectWallet(); toggleMenu()">
+            <i class="fas fa-wallet"></i> Connect Wallet
+        </button>
+        <button class="nav-btn outline-btn full-width" onclick="showRegisterForm(); toggleMenu()">
+            <i class="fas fa-user-plus"></i> Register Voter
+        </button>
+        <button class="nav-btn primary-btn full-width" onclick="showCandidateForm(); toggleMenu()">
+            <i class="fas fa-user-tie"></i> Stand for Election
+        </button>
+    </div>
+
+    <!-- ALERTS -->
+    <div id="alerts" class="alerts-container"></div>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+        <div class="hero-grid-bg"></div>
+        <div class="hero-content">
+            <div class="hero-tag">
+                <span class="tag-dot"></span>
+                Blockchain-Powered
             </div>
-            <h2>Secure and Transparent Voting System</h2>
-            <div class="info"><p>Experience the future of voting with Decentralized Voting System</p></div>
+            <h1 class="hero-title">Decentralised<br><span class="accent">Voting</span> System</h1>
+            <p class="hero-sub">Transparent, tamper-proof elections secured by smart contracts. Every vote is immutable, every result is verifiable on-chain.</p>
+            <div class="hero-actions">
+                <button class="btn-hero-primary" onclick="scrollToVoting()">
+                    <i class="fas fa-vote-yea"></i> View Candidates
+                </button>
+                <button class="btn-hero-ghost" onclick="scrollToResults()">
+                    <i class="fas fa-chart-bar"></i> View Results
+                </button>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-pill">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>End-to-end encrypted</span>
+                </div>
+                <div class="stat-pill">
+                    <i class="fas fa-link"></i>
+                    <span>On-chain verification</span>
+                </div>
+                <div class="stat-pill">
+                    <i class="fas fa-eye"></i>
+                    <span>Publicly auditable</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hex-ring ring-1"></div>
+            <div class="hex-ring ring-2"></div>
+            <div class="hex-ring ring-3"></div>
+            <div class="hex-center">
+                <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                    <polygon points="32,4 60,18 60,46 32,60 4,46 4,18" stroke="#63e6b6" stroke-width="2" fill="none" opacity="0.6"/>
+                    <polygon points="32,14 50,24 50,40 32,50 14,40 14,24" stroke="#63e6b6" stroke-width="1.5" fill="rgba(99,230,182,0.08)"/>
+                    <circle cx="32" cy="32" r="8" fill="#63e6b6" opacity="0.9"/>
+                    <circle cx="32" cy="32" r="4" fill="#0a0c10"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- WALLET CONNECT BANNER -->
+    <div class="connect-banner" id="connect-banner">
+        <div class="banner-inner">
+            <div class="banner-icon">
+                <i class="fab fa-ethereum"></i>
+            </div>
+            <div class="banner-text">
+                <strong>Connect your wallet to participate</strong>
+                <span>You need MetaMask to register, vote, or view live results.</span>
+            </div>
+            <button class="btn-connect-now" onclick="connectWallet()">
+                Connect MetaMask <i class="fas fa-arrow-right"></i>
+            </button>
         </div>
     </div>
 
-    <div id="alerts" class="alerts-container"></div>
+    <main id="main">
 
-    <main>
-        <section id="main-content">
-            <h2 class="h2-title"> Current Candidates</h2>
-            <div id="candidates-list" class="candidates-grid"></div>
+        <!-- ACTIVE CANDIDATES -->
+        <section id="candidates-section" class="section">
+            <div class="section-header">
+                <div>
+                    <div class="section-tag">Live Election</div>
+                    <h2 class="section-title">Active Candidates</h2>
+                </div>
+                <div class="section-meta" id="candidate-count-badge"></div>
+            </div>
+            <div id="candidates-list" class="candidates-grid">
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+            </div>
         </section>
 
-        <section class="results-section">
-            <div class="results-container">
-                <div class="results-box">
-                    <button onclick="getVotes()" class="action-btn">
-                        <i class="fas fa-chart-bar"></i> View Vote Count
+        <!-- RESULTS DASHBOARD -->
+        <section id="results-section" class="section">
+            <div class="section-header">
+                <div>
+                    <div class="section-tag">Dashboard</div>
+                    <h2 class="section-title">Results &amp; Analytics</h2>
+                </div>
+            </div>
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="result-card-header">
+                        <div class="result-card-icon blue-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div>
+                            <h3>Vote Tally</h3>
+                            <p>Live vote counts per candidate</p>
+                        </div>
+                    </div>
+                    <button onclick="getVotes()" class="result-action-btn blue-btn">
+                        <i class="fas fa-sync-alt"></i> Fetch Live Votes
                     </button>
                     <div id="vote-results" class="results-display"></div>
                 </div>
-
-                <div class="results-box winner-box">
-                    <button onclick="getResult()" class="action-btn">
-                        <i class="fas fa-trophy"></i> View Results
+                <div class="result-card winner-card">
+                    <div class="result-card-header">
+                        <div class="result-card-icon amber-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div>
+                            <h3>Election Winner</h3>
+                            <p>Current leading candidate</p>
+                        </div>
+                    </div>
+                    <button onclick="getResult()" class="result-action-btn amber-btn">
+                        <i class="fas fa-award"></i> Declare Result
                     </button>
                     <div id="election-result" class="results-display"></div>
                 </div>
             </div>
         </section>
+
+        <!-- ADMIN PANEL -->
+        <section id="admin-section" class="section">
+            <div class="section-header">
+                <div>
+                    <div class="section-tag admin-tag">Admin</div>
+                    <h2 class="section-title">Admin Panel</h2>
+                </div>
+                <div class="admin-warning">
+                    <i class="fas fa-lock"></i> Contract Owner Only
+                </div>
+            </div>
+            <div class="admin-grid">
+                <div class="admin-card">
+                    <div class="admin-card-icon">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <h4>Manage Voters</h4>
+                    <p>View all registered voters and their voting status on-chain.</p>
+                    <button class="admin-btn" onclick="showAlert('Admin: Voter management available via smart contract.','info')">
+                        <i class="fas fa-list"></i> View Voters
+                    </button>
+                </div>
+                <div class="admin-card">
+                    <div class="admin-card-icon amber-admin-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <h4>Verify Candidates</h4>
+                    <p>Review candidate registrations and ensure eligibility compliance.</p>
+                    <button class="admin-btn amber-admin-btn" onclick="loadCandidates()">
+                        <i class="fas fa-sync"></i> Refresh Candidates
+                    </button>
+                </div>
+                <div class="admin-card">
+                    <div class="admin-card-icon red-admin-icon">
+                        <i class="fas fa-flag-checkered"></i>
+                    </div>
+                    <h4>Election Control</h4>
+                    <p>Initiate or conclude the election phase via the smart contract.</p>
+                    <button class="admin-btn red-admin-btn" onclick="showAlert('Election control is managed via smart contract owner functions.','info')">
+                        <i class="fas fa-power-off"></i> Manage Election
+                    </button>
+                </div>
+                <div class="admin-card">
+                    <div class="admin-card-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h4>Contract Address</h4>
+                    <p class="mono-text small-mono">0x6F4Ed69DCFc56e9966d3b0C3711B53c434c47dD9</p>
+                    <button class="admin-btn" onclick="copyContract()">
+                        <i class="fas fa-copy"></i> Copy Address
+                    </button>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <!-- Modal Forms -->
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <svg width="18" height="18" viewBox="0 0 28 28" fill="none">
+                    <polygon points="14,2 26,8 26,20 14,26 2,20 2,8" stroke="#63e6b6" stroke-width="1.5" fill="none"/>
+                    <circle cx="14" cy="14" r="3" fill="#63e6b6"/>
+                </svg>
+                <span>VoteChain</span>
+            </div>
+            <span class="footer-note">Secured by Ethereum Smart Contracts &mdash; CBC Project</span>
+        </div>
+    </footer>
+
+    <!-- REGISTER VOTER MODAL -->
     <div id="register-form" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2><i class="fas fa-user"></i> Register as Voter</h2>
-            <div class="form-group">
-                <input type="text" id="voter-aadhar" placeholder="Aadhaar Number" maxlength="12">
-                <span class="error-message"></span>
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <div class="modal-title-group">
+                    <h2>Register as Voter</h2>
+                    <p>Complete your identity verification to participate</p>
+                </div>
+                <span class="close-btn" onclick="closeModal()"><i class="fas fa-times"></i></span>
             </div>
-            <div class="form-group">
-                <input type="text" id="voter-id" placeholder="Voter ID" maxlength="10">
-                <span class="error-message"></span>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Aadhaar Number</label>
+                    <input type="text" id="voter-aadhar" placeholder="12-digit Aadhaar number" maxlength="12">
+                    <span class="error-message"></span>
+                </div>
+                <div class="form-group">
+                    <label>Voter ID</label>
+                    <input type="text" id="voter-id" placeholder="10-character Voter ID" maxlength="10">
+                    <span class="error-message"></span>
+                </div>
+                <div class="form-group">
+                    <label>Age</label>
+                    <input type="number" id="voter-age" placeholder="Must be 18 or above" min="18">
+                    <span class="error-message"></span>
+                </div>
+                <button onclick="registerVoter()" class="submit-btn">
+                    <i class="fas fa-check-circle"></i> Register on Blockchain
+                </button>
             </div>
-            <div class="form-group">
-                <input type="number" id="voter-age" placeholder="Age">
-                <span class="error-message"></span>
-            </div>
-            <button onclick="registerVoter()" class="submit-btn">Register</button>
         </div>
     </div>
 
+    <!-- REGISTER CANDIDATE MODAL -->
     <div id="candidate-form" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2><i class="fas fa-user-tie"></i> Register as Candidate</h2>
-            <div class="form-group">
-                <input type="text" id="candidate-name" placeholder="Full Name">
-                <span class="error-message"></span>
+            <div class="modal-header">
+                <div class="modal-icon amber-modal-icon">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <div class="modal-title-group">
+                    <h2>Stand for Election</h2>
+                    <p>Register yourself as an election candidate</p>
+                </div>
+                <span class="close-btn" onclick="closeModal()"><i class="fas fa-times"></i></span>
             </div>
-            <div class="form-group">
-                <input type="number" id="candidate-age" placeholder="Age">
-                <span class="error-message"></span>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="candidate-name" placeholder="As on official documents">
+                    <span class="error-message"></span>
+                </div>
+                <div class="form-group">
+                    <label>Age</label>
+                    <input type="number" id="candidate-age" placeholder="Must be 25 or above" min="25">
+                    <span class="error-message"></span>
+                </div>
+                <div class="form-group">
+                    <label>Candidate ID</label>
+                    <input type="number" id="candidate-id" placeholder="Unique numeric ID">
+                    <span class="error-message"></span>
+                </div>
+                <div class="form-group">
+                    <label>Profile Image CID (IPFS)</label>
+                    <input type="text" id="candidate-image-cid" placeholder="IPFS Content Identifier">
+                    <span class="error-message"></span>
+                </div>
+                <button onclick="registerAsCandidate()" class="submit-btn amber-submit">
+                    <i class="fas fa-file-signature"></i> Submit Candidacy
+                </button>
             </div>
-            <div class="form-group">
-                <input type="number" id="candidate-id" placeholder="Candidate ID">
-                <span class="error-message"></span>
-            </div>
-            <div class="form-group">
-                <input type="text" id="candidate-image-cid" placeholder="Image CID">
-                <span class="error-message"></span>
-            </div>
-            <button onclick="registerAsCandidate()" class="submit-btn">Register</button>
         </div>
     </div>
 
