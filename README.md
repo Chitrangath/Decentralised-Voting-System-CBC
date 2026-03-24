@@ -2,7 +2,7 @@
 
 A blockchain-based voting system built on Ethereum that ensures secure, transparent, and tamper-proof elections. 🔐✨
 
-Link to the project deployed to the SEPOLIA TESTNET - https://decentra-voting-system.netlify.app/
+Link to the project deployed to the SEPOLIA TESTNET - https://decentra-voting-system.netlify.app/ (OLD)
 
 ## 🔍 How It Works
 
